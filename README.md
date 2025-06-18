@@ -7,7 +7,6 @@ View it online at: [https://your-vercel-url.vercel.app](https://your-vercel-url.
 
 ## 📂 Folder Structure
 poetry-portfolio-eslam/
-│
 
 ├── index.html
 
