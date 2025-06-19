@@ -49,29 +49,15 @@ The repository is structured to be clean and easily deployable on static hosting
 - **Feather Icons**: أيقونات أنيقة وخفيفة الوزن.
 - **Web3Forms**: لإدارة رسائل نموذج التواصل.
 
-## Deployment with Vercel
-Hosting this project on Vercel is straightforward as it requires no build configuration.
-
-1.  **Push to GitHub:** Ensure your `index.html` file and the `assets` folder are pushed to your GitHub repository.
-2.  **Import to Vercel:**
-    - Sign up or log in to [Vercel](https://vercel.com) using your GitHub account.
-    - Click on "Add New..." -> "Project".
-    - Select your `poetry-portfolio-eslam` repository.
-3.  **Deploy:**
-    - Vercel will automatically detect that this is a static site.
-    - No changes are needed for the "Build and Output Settings".
-    - Click the **"Deploy"** button.
-4.  **Done:** Your website will be live in minutes at your custom Vercel URL.
-
-## كيفية الاستخدام المحلي | Local Usage
-
-To run the website on your local machine:
-1.  Clone the repository: `git clone https://github.com/Eslam1Osama/poetry-portfolio-eslam.git`
-2.  Navigate to the project directory: `cd poetry-portfolio-eslam`
-3.  Open the `index.html` file directly in any modern web browser.
 
 **Note:** An internet connection is required to load Google Fonts, Tailwind CSS, and Feather Icons from their respective CDNs.
 
 ---
+## المؤلف
+إسلام أسامة سعد
+شاعر ومهندس تقني
+📧 eo54872@gmail.com
+---
+
 
 **تم التطوير بحب وعناية فائقة لخدمة الشعر العربي الأصيل ❤️**
