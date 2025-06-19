@@ -55,11 +55,11 @@ The repository is structured to be clean and easily deployable on static hosting
 ---
 ## المؤلف
 
-# إسلام أسامة سعد
+**إسلام أسامة سعد**
 
-# شاعر ومهندس تقني
+**شاعر ومهندس تقني**
 
-# eo54872@gmail.com
+**eo54872@gmail.com**
 
 ---
 
