@@ -1,6 +1,5 @@
 # PoetBeLoved - The Portfolio of Poet Islam Osama Saad
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FEslam1Osama%2Fpoetry-portfolio-eslam)
 
 An elegant and responsive website designed to showcase the poetic works of Islam Osama Saad, crafted with meticulous care to reflect the beauty and soul of Arabic poetry.
 
