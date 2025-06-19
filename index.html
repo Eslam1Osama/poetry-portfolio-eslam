@@ -411,6 +411,129 @@
           }
         }
 
+        /* Animated SVG Waves for Hero Section */
+        .hero-waves-bg {
+          position: absolute;
+          left: 0; right: 0; bottom: 0;
+          width: 100%;
+          height: 180px;
+          z-index: 1;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        @media (max-width: 640px) {
+          .hero-waves-bg {
+            height: 90px;
+          }
+        }
+        .hero-waves-bg svg {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+
+        /* Advanced error and help message styling for contact form */
+        .form-error {
+          color: #c0392b;
+          background: linear-gradient(90deg, #fff0f0 60%, #ffe5e5 100%);
+          border-radius: 0.75rem;
+          font-size: 1.05em;
+          margin-top: 0.25rem;
+          margin-bottom: 0.5rem;
+          padding: 0.5rem 1rem;
+          text-align: right;
+          font-family: inherit;
+          box-shadow: 0 2px 8px 0 rgba(192,57,43,0.07);
+          border: 1px solid #f8d7da;
+          display: none;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          transition: opacity 0.3s, transform 0.3s;
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        .form-error.active {
+          display: block;
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .form-help {
+          color: #888;
+          background: none;
+          font-size: 0.98em;
+          margin-top: 0.15rem;
+          margin-bottom: 0.25rem;
+          padding: 0 0.5rem;
+          text-align: right;
+          font-family: inherit;
+          display: none;
+          transition: color 0.2s;
+        }
+        input:focus + .form-help,
+        textarea:focus + .form-help {
+          display: block;
+          color: var(--primary-color);
+        }
+        input:invalid, textarea:invalid {
+          border-color: #c0392b !important;
+          box-shadow: 0 0 0 2px #c0392b22 !important;
+        }
+        input:focus:invalid, textarea:focus:invalid {
+          border-color: #c0392b !important;
+          box-shadow: 0 0 0 2px #c0392b44 !important;
+        }
+        /* Disable hover effect for disabled submit button */
+        #submit-button:disabled,
+        #submit-button.disabled {
+          pointer-events: none;
+          opacity: 0.6;
+          filter: grayscale(0.2);
+          box-shadow: none !important;
+          transform: none !important;
+          background: linear-gradient(90deg, #bbb 60%, #eee 100%) !important;
+          color: #fff !important;
+          cursor: not-allowed !important;
+        }
+        #submit-button:disabled:hover,
+        #submit-button.disabled:hover {
+          box-shadow: none !important;
+          transform: none !important;
+        }
+
+        /* Move modal close (×) button to top left, above scroll area */
+        #close-modal {
+          position: absolute;
+          top: 1.1rem;
+          right: 1.1rem;
+          z-index: 30;
+          background: rgba(255,255,255,0.85);
+          border-radius: 50%;
+          width: 2.5rem;
+          height: 2.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+          border: none;
+          font-size: 1.7rem;
+          color: var(--primary-color, #e59f71);
+          cursor: pointer;
+          transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+        }
+        #close-modal:hover, #close-modal:focus {
+          background: var(--primary-color, #e59f71);
+          color: #fff;
+          box-shadow: 0 4px 16px 0 rgba(229,159,113,0.13);
+        }
+        @media (max-width: 640px) {
+          #close-modal {
+            top: 0.5rem;
+            left: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+            font-size: 1.2rem;
+          }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -458,12 +581,45 @@
     <main>
         <!-- Hero Section -->
         <section id="hero" class="relative text-center py-16 sm:py-20 md:py-32 px-4 overflow-hidden">
+            <div class="hero-aurora-bg">
+                <span class="aurora1"></span>
+                <span class="aurora2"></span>
+                <span class="aurora3"></span>
+            </div>
+            <div class="hero-waves-bg">
+                <svg viewBox="0 0 1440 180" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                    <path fill="url(#wave1)" fill-opacity="0.7">
+                        <animate attributeName="d" dur="12s" repeatCount="indefinite"
+                            values="M0,80 C360,160 1080,0 1440,80 L1440,180 L0,180 Z;
+                                    M0,100 C360,40 1080,180 1440,100 L1440,180 L0,180 Z;
+                                    M0,80 C360,160 1080,0 1440,80 L1440,180 L0,180 Z"/>
+                    </path>
+                    <path fill="url(#wave2)" fill-opacity="0.4">
+                        <animate attributeName="d" dur="16s" repeatCount="indefinite"
+                            values="M0,120 C480,60 960,180 1440,120 L1440,180 L0,180 Z;
+                                    M0,140 C480,180 960,60 1440,140 L1440,180 L0,180 Z;
+                                    M0,120 C480,60 960,180 1440,120 L1440,180 L0,180 Z"/>
+                    </path>
+                    <defs>
+                        <linearGradient id="wave1" x1="0" y1="0" x2="1440" y2="180" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="var(--primary-color)"/>
+                            <stop offset="1" stop-color="var(--accent-color)"/>
+                        </linearGradient>
+                        <linearGradient id="wave2" x1="0" y1="0" x2="1440" y2="180" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="var(--accent-color)"/>
+                            <stop offset="1" stop-color="var(--primary-color)"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
             <div class="absolute inset-0 bg-gradient-main opacity-20 transform -skew-y-3"></div>
-            <div class="relative z-10 container mx-auto">
-                <h1 class="font-amiri text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 fade-in animated-gradient">رحلة الكلمات الخالدة</h1>
-                <p class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto opacity-90 fade-in leading-relaxed sm:leading-loose" style="animation-delay: 0.2s;">
-                    هنا، حيث تنساب الحروف كالنهر، وتتراقص المعاني على أوتار القلوب. أدعوكم للغوص في بحور الشعر، بين فصاحة الضاد ودفء العامية.
-                </p>
+            <div class="relative z-10 container mx-auto flex flex-col items-center justify-center">
+                <div class="hero-glass-panel">
+                    <h1 class="font-amiri text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 fade-in animated-gradient">رحلة الكلمات الخالدة</h1>
+                    <p class="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto opacity-90 fade-in leading-relaxed sm:leading-loose" style="animation-delay: 0.2s;">
+                        هنا، حيث تنساب الحروف كالنهر، وتتراقص المعاني على أوتار القلوب. أدعوكم للغوص في بحور الشعر، بين فصاحة الضاد ودفء العامية.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -516,22 +672,27 @@
             <div class="container mx-auto text-center fade-in-section">
                 <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-gradient mb-3 sm:mb-4 animated-gradient">تواصل معي</h2>
                 <p class="text-base sm:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">يسعدني سماع آرائكم وتعليقاتكم. شاركوني أفكاركم أو استفساراتكم عبر النموذج التالي.</p>
-                <form id="contact-form" class="max-w-xl mx-auto text-right px-4 sm:px-0">
+                <form id="contact-form" class="max-w-xl mx-auto text-right px-4 sm:px-0" novalidate>
                     <input type="hidden" name="access_key" value="156f7ac9-5df6-4f52-8d54-40e0cbc9a672">
                     <input type="hidden" name="subject" value="رسالة جديدة من زائر لموقع PoetBeLoved">
                     <input type="hidden" name="from_name" value="PoetBeLoved Website">
-                    
                     <div class="mb-4">
                         <label for="name" class="block mb-2 font-bold text-base sm:text-lg">الاسم</label>
-                        <input type="text" id="name" name="name" class="w-full p-2.5 sm:p-3 text-base sm:text-lg rounded-lg bg-card-custom border-2 border-transparent focus:border-primary-custom focus:outline-none transition-colors" required>
+                        <input type="text" id="name" name="name" class="w-full p-2.5 sm:p-3 text-base sm:text-lg rounded-lg bg-card-custom border-2 border-transparent focus:border-primary-custom focus:outline-none transition-colors" required minlength="2" maxlength="50" autocomplete="name" placeholder="مثال: أحمد محمد" aria-describedby="help-name error-name">
+                        <div class="form-help" id="help-name">أدخل اسمك الحقيقي (بدون أرقام أو رموز).</div>
+                        <div class="form-error" id="error-name" role="alert" aria-live="polite"></div>
                     </div>
-                     <div class="mb-4">
+                    <div class="mb-4">
                         <label for="email" class="block mb-2 font-bold text-base sm:text-lg">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" class="w-full p-2.5 sm:p-3 text-base sm:text-lg rounded-lg bg-card-custom border-2 border-transparent focus:border-primary-custom focus:outline-none transition-colors" required>
+                        <input type="email" id="email" name="email" class="w-full p-2.5 sm:p-3 text-base sm:text-lg rounded-lg bg-card-custom border-2 border-transparent focus:border-primary-custom focus:outline-none transition-colors" required maxlength="100" autocomplete="email" placeholder="your@email.com" aria-describedby="help-email error-email">
+                        <div class="form-help" id="help-email">سيتم استخدام بريدك للرد فقط ولن يتم مشاركته.</div>
+                        <div class="form-error" id="error-email" role="alert" aria-live="polite"></div>
                     </div>
-                     <div class="mb-6">
+                    <div class="mb-6">
                         <label for="message" class="block mb-2 font-bold text-base sm:text-lg">رسالتك</label>
-                        <textarea id="message" name="message" rows="5" class="w-full p-2.5 sm:p-3 text-base sm:text-lg rounded-lg bg-card-custom border-2 border-transparent focus:border-primary-custom focus:outline-none transition-colors" required></textarea>
+                        <textarea id="message" name="message" rows="5" class="w-full p-2.5 sm:p-3 text-base sm:text-lg rounded-lg bg-card-custom border-2 border-transparent focus:border-primary-custom focus:outline-none transition-colors" required minlength="10" maxlength="1000" placeholder="اكتب رسالتك هنا..." aria-describedby="help-message error-message"></textarea>
+                        <div class="form-help" id="help-message">اكتب رسالتك بوضوح وبما لا يقل عن 10 أحرف.</div>
+                        <div class="form-error" id="error-message" role="alert" aria-live="polite"></div>
                     </div>
                     <button type="submit" id="submit-button" class="bg-gradient-main text-white font-bold text-base sm:text-lg py-2.5 sm:py-3 px-8 sm:px-12 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 w-full">
                         إرسال
@@ -621,8 +782,8 @@
             { id: 'p3', title: 'الْكَسَلُ: خَصْمِي الْأَبَدِيُّ', type: 'فصحي', youtubeId: '1MNY9NGYBPU', content: `إِنَّهُ الْكَسَلُ غَرِيمِي فِي غَيَاهِبِ الْفَجْرِ وَاللَّيْلِ\nتَتَرَبَّصُ بِي كَظِلٍّ فِي النَّهَارِ وَفِي اللَّيْلِ\n\nكَمْ مَرَّةً جَالَتْ جُيُوشُكَ عَلَى مَرْمَى بَصَرِي\nوَقُلْتُ سَأَغْلِبُكَ، وَلَكِنْ عَادَ النِّزَالُ فِي لَمْحِ الْبَصَرِ\n\nفِي الصَّبَاحِ، أَفْتَتِحُ الْمَعْرَكَةَ بِرُوحٍ شَاَبَّةٍ\nوَفِي الْمَسَاءِ أَجِدُكَ قَدْ نَثَرْتَ رِدَاءَكَ الثَّقِيلَ كَالدَّابَّةِ\n\nأَرْكَبُ صَهْوَةَ الْإِرَادَةِ، وَأَسُلُّ سَيْفَ الْعَزْمِ\nوَلَكِنْ هَيْهَاتَ! يَعُودُ الْكَسَلُ كَالضَّبَابِ الْوَهْمِيِّ\n\nيَا مَنْ زَرَعْتَ فِي أَضْلَاعِي نَبْتَةَ الْكَسَلِ الْخَفِيِّ\nمَتَى سَأَنْزِعُ جُذُورَهَا، وَأَحْيَا بِرُوحِ الْأَبِيِّ؟\n\nمَعْرَكُتنَا لَا تَنْتَهِي، كَالْأَمْوَاجِ عَلَى الشَّاطِئِ\nتَعُودُ بِحِدَّةٍ، وَتَدُورُ فِي عُبَابِهَا الصَّاخِبِ\n\nوَلَكِنَّكَ يَا كَسَلُ لَنْ تَكُونَ نِهَايَةَ حُلْمِي\nسَأَظَلُّ أُحَارِبُكَ حَتَّى آخِرِ رَمَقٍ مِنْ عُمْرِي\n\nفَهَلْ سَتَسْقُطُ يَوْمًا أَمَامَ عَزِيمَتِي الْأَبِيَّةِ\nأَمْ سَتَبْقَى تُصَارِعُنِي فِي دَوَّامَةٍ خَفِيَّةٍ؟\n\nأَرَاكَ تَتَسَلَّقُ جُدْرَانَ الْكَسَلِ فِي دَاخِلِي كَالْأَفْعَى\nوَأَنَا أُوَاجِهُكَ بِشَجَاعَةٍ لَا تَنْحَنِي وَلَا تَهْوَى\n\nيَا مَنْ تَنْسُجُ شِبَاكَكَ حَوْلِي كَعَنْكَبُوتٍ لَا يَرْحَمْ\nسَأَكْسِرُ قُيُودَكَ، وَأَمْضِي إِلَى أَهْدَافِي الَّتِي لَا تَهْرَمْ\n\nيَا كَسَلُ، لَنْ تَنَالَ مِنْ عَزِيمَتِي الصَّخْرِيَّةِ\nفَأَنَا بَطَلٌ لَا يَهْوَى الْإِنْكِسَارَ أَمَامَ أَلَاعِيبِكَ الثُّعْبَانِيَّةِ\n\nفِي كُلِّ يَوْمٍ أُوَاجِهُكَ بِعَزِيمَةٍ لَا تَلِينُ\nوَفِي كُلِّ صِرَاعٍ أَقْتَنِصُ مِنْكَ نَصْرًا مُبِينْ\n\nيَا مَعْرَكَتِي الْأَبَدِيَّةُ مَعَ الْكَسَلِ، مَتَى تَنْتَهِي؟\nسَأَبْقَى أُقَاتِلُكِ حَتَّى يَزُولَ لَيْلُكِ وَيَنْجَلِي` },
             { id: 'p4', title: 'أمَلِ الإصْرَارِ', type: 'فصحي', youtubeId: 'XTKjQ1J6CX8', content: `يَا شَبَابَ هَذَا الجِيلِ، أَرَاكُمْ تَرْنُونَ إِلَى حُلْمٍ جَمِيلِ\nتَسْعُونَ لِبَيْتٍ دَافِئٍ، يَضُمُّ حَبِيبَ القَلْبِ فِي لَيْلٍ طَوِيلِ\nلَكِنْ، أَتَدْرِي أَنَّ الدَّرْبَ لَيْسَ بِالطَّوِيلِ؟\nوَأَنَّ قَطْفَ الثِّمَارِ يَسْبِقُهُ زَرْعٌ نَبِيلِ؟\nتَفَكَّرُوا قَبْلَ أَنْ تَسْعَو لِالْتِزَامٍ كَبِيرٍ\nفَالْحُبُّ لَيْسَ لَهْوًا وَلَا هُوَى عَابِرًا، بَلْ هُوَ مَصِيرٌ\nاِبْنُوا أَنْفُسَكُمْ أَوَّلًا بِالعِلْمِ وَالعَمَلِ الدَّؤُوبْ\nوَاجْعَلُوا مِنْ طُمُوحِكُمْ نُورًا يُضِيءُ دَرْبَ القُلُوبْ\nاِسْعَوْ لِرِزْقٍ حَلَالٍ يُؤَمِّنُ لَكُمْ عَيْشًا كَرِيمًا\nفَالْمَالُ وَحْدَهُ لَا يَكْفِي، لَكِنَّهُ يَبْنِي أَسَاسًا قَوِيمًا\nلَا تَنْظُرُوا لِلْآخَرِينَ وَتُقَارِنُوا ذَوَاتِكُمْ\nبَلْ رَكِّزُوا عَلَى أَنْفُسِكُمْ وَاعْمَلُوا لِأَهْدَافِكُمْ\nوَإِذَا بَلَغْتُمُ المَنَالَ وَأَصْبَحْتُمْ مُسْتَقِرِّينْ\nفَافْتَحُوا قُلُوبَكُمْ لِلْحُبِّ وَكُونُوا لَهُ مُرْتَفِقِينْ\nفَالْحُبُّ الحَقِيقِيُّ يَزْدَهِرُ فِي القُلُوبْ\nوَيَفِيضُ فِي أَرْضٍ خَصِبَةٍ وَيُحَقِّقُ المَطْلُوبْ\nيَا شَبَابَ اليَوْمِ، أَنْتُمْ أَمَلُ الغَدِ وَفَخْرُهُ\nفَكُونُوا لِوَطَنِكُمْ عِزًّا وَفِي المُسْتَقْبَلِ أَصْلَهُ\nاِبْنُوا ذَوَاتِكُمْ بِعِلْمٍ وَاقْتِدَارٍ\nفَتَجْنُونَ فِي النِّهَايَةِ ثِمَارَ الإِصْرَارِ` },
             { id: 'p5', title: 'بِنُورِ عَطَائِكِ يا أمي', type: 'فصحي', youtubeId: 'CWMmp7mxIH4', content: `أمي يا نُورَ حَيَاتى ووجْدَانِي\nبِحَنَانِ قَلْبِكِ تُغْمُرينَ أَيَّامي\n\nفِي لَيَالِي سَهْرِكِ دَوَاءٌ لِي\nوَبِصَبْرِكِ شُفِيتُ كُلَّ أَلَامِي\n\nعَطَائُكِ أُسْطُورَةُ عِشْقٍ فِي مَجْدِ سَمَائِي\nوَرَحِمْتُ اللهَ لَكِ نُورُ ضِيائِي\n\nأَشْرَقَتْ أَيَّامي بِنُورِ حُبِّكِ،\nوَسَكَنْتِ قَلْبِي، فَغُدَتِ فِيهِ زَهْرَةُ بُسْتَانِي\n\nلا أَطيقُ صَبْرَ فِراقِكِ\nفأنتِ بَهْجَةُ دَرْبِي ونورُ رَبيعِ سمائِي\n\nأمي، سأظلُّ دائماً سندَكِ الوفيَّ\nوفي دربِ عشقِكِ تُزهرُ خطايَ بِنِوَارِكِ العلَى\n\nبِتَفَانِيكِ نُسِجَتْ رِسَالَةُ حَيَاتِي\nفَأَضْحَى طَرِيقِي مَهَّدًا مُضِيئًا بِنُورِ عَطَائِكِ\n\nأمّي يا سرَّ فؤادي ونبعَ حياتي\nأناجي ربّي بطولِ العمرِ وأطيبُ الأمالى\n\nدَعَوْتُ الرَّحْمَنَ أَنْ يُسْقِيكِ بِنِعْمَةٍ\nوَأَنْ يُحْيِي قَلْبَكِ بِأَسْمَى الْمَعَانِي\n\nأَنْسُجُ شُكْرِي فِي ثَوْبِ الْوَفَاءِ\nوَأُهْدِيَكِ مِنْ حُبِّي أَجْمَلَ الأَمَانِي` },
-            { id: 'p6', title: 'عتاب مع النفس', type: 'فصحي', youtubeId: 'VYTopvzDMLo', content: `أيُّها النَّفسُ إنْ طالَت بكِ الأعْذَارُ\nلَا تُلِمْنِي عَلَى نَقْصِي وَلَا عِثَارِي\nنَحْنُ فِي الْأَرْضِ بُنْيَانٌ لَهُ أَمَلٌ\nوَالْخَطَايَا نُجُومٌ فِي سَمَاءِ الْحَيِّرِ\nقِسْ عَلَى ذَاتِكَ، وَاتْرُكْ هَمَّ مَن غَابُوا\nوَلَا تُقَارِنْ بَصِيصَ النُّورِ بِالْحُجُبِ\nكُلُّ رُوحٍ فِي الدَّرْبِ لَهَا أَنْغَامُهَا\nحَتَّى وَإِنْ جَابَتِ السُّبُلُ بِمِحْنِهَا\nلَا تَكُنْ نُسْخَةً تُحَاكِي سَرَابَ غَيْرِكَ\nكُلُّ شَمْسٍ تَطِلُّ مِنْ وَرَاءِ غَيْمِكَ\nإِنَّ تَطْوِيرَكَ لِلرُّوحِ غَايَتُهَا\nيُمْسِي فِي الصَّبْرِ بَابًا لِلْإِنْتِصَارِ\nsِرْ عَلَى نَهْجِ نَفْسٍ قَدْ رَضِيَتْ بِأَمْسٍ\nتَخْطُو نَحْوَ مُسْتَقْبَلٍ بِنُورِ النَّهَارِ\nكُلُّ أَمْرٍ لَهُ فِي النُّورِ بَصِيصُ أَمَلٍ\nيَرْسُمُ الرُّوحَ فِي الدُّنْيَا بِمُقْتَبَلٍ\nفِي الْقَنَاعَةِ بَحْرٌ مِنْ أَمَانِينَا\nيُبَشِّرُ الرُّوحَ بِالسَّلَامِ مِنَ الْمَرَامِ\nعُيُوبِي لَيْسَتْ عَارًا عَلَيَّ، بَلْ\nهِيَ سِمَاتٌ تُزِيدُ الْقَلْبَ فِي الصِّدَارِ\nأَقْبَلُهَا بِرِضًا فِي كُلِّ مَرْحَلَةٍ\nفَهِيَ الجُزْءُ مِنْ شَخْصِي وَمِنْ أَمَلِي\nلَسْتُ نُسْخَةً، وَلَا أَرْغَبُ فِي التَّكْرَارِ\nكُلُّ نَفْسٍ لَهَا فِي الْبُعْدِ مِقْدَار\nكُلُّ إِنْسَانٍ فَرِيدٌ فِي خَلِيقَتِهِ\nوَفِي مَا أَعْطَانِيَ الْغَفَّارُ أَفْتَخِرُ\nتَقَبَّلْ نَفْسَكَ، وَابْتَهِجْ بِلَحْظَةٍ هَانِئَةٍ\nفِي قَبُولِكَ تَجِدُ رَاحَةً مُطْمَئِنَّةً` },
-            { id: 'p7', title: 'عيدُ المودّة (الفطر)', type: 'فصحي', youtubeId: 'nIyBHZCG2sE', content: `عيدُ الفِطرِ أقبلَ بالبُشرات\nوضياؤهُ يملأُ الأرضَ بالخيراتِ\n\nيا نَسَائِمَ العِيدِ أقبل بِبَهْجَتِكَ\nوَانْثُرِ عِطْرَكَ فِي كُلِّ الجِهَاتِ\n\nجهَّزْنا لهُ بالكعكِ والبسكوتِ\nلننشرَ الفرحَ في كلِّ البيوتِ\n\nnنتظِرُ صلاةَ العيدِ بشوقٍ وَلَهْفَةٍ\nلنحيا مع التكبيرِ بأزكى اللحظاتِ\n\nنَمْلأُ السَّاحَاتِ بِأَعْلَى التَّكْبِيرَاتِ\nفَتَهْتَزُّ أَرْوَاحُنَا بِنَشْوَةِ الطَّاعَاتِ\n\nيَا نُورَ العِيدِ زِدْنَا مِنْ بَهَائِكَ\nوَاجْعَلْ صَلَاتَنَا تَزْهُو بِبَرَكَاتِكَ\n\nالعِيدُ أَفْرَاحٌ تُزَيِّنُ دَارَنَا\nوَحُلِيّ المَوَدَّةِ تُنِيرُ التجمعات\n\nنَلْتَفُّ فِي العِيدِ أَهْلًا وَأَصْحَاب\nوَنَزْرَعُ البُشْرَى زُهُورًا فِي اللِّقَاءَاتِ\n\nيَهْنَأُ الصِّغَارُ بِالعِيدِيَّةِ مُبْتَهِجِينَ\nفَالعِيدُ بَسَمَاتٌ تَفِيضُ بِالبَهَجَاتِ\n\nكُلُّ الدُّرُوبِ تُنَادِي فِي بَهَاءِ\nفالعِيدُ أَقْبَلَ بِأسمى العَطَاءات\n\nأَكرَمَنَا اللَّهُ بِنُورِ فَضْلِهِ\nوَجَعَلَ العِيدَ بَرَكَاتٍ وَرَحَمَاتِ` },
+            { id: 'p6', title: 'عتاب مع النفس', type: 'فصحي', youtubeId: 'VYTopvzDMLo', content: `أيُّها النَّفسُ إنْ طالَت بكِ الأعْذَارُ\nلَا تُلِمْنِي عَلَى نَقْصِي وَلَا عِثَارِي\nنَحْنُ فِي الْأَرْضِ بُنْيَانٌ لَهُ أَمَلٌ\nوَالْخَطَايَا نُجُومٌ فِي سَمَاءِ الْحَيِّرِ\nقِسْ عَلَى ذَاتِكَ، وَاتْرُكْ هَمَّ مَن غَابُوا\nوَلَا تُقَارِنْ بَصِيصَ النُّورِ بِالْحُجُبِ\nكُلُّ رُوحٍ فِي الدَّرْبِ لَهَا أَنْغَامُهَا\nحَتَّى وَإِنْ جَابَتِ السُّبُلُ بِمِحْنِهَا\nلَا تَكُنْ نُسْخَةً تُحَاكِي سَرَابَ غَيْرِكَ\nكُلُّ شَمْسٍ تَطِلُّ مِنْ وَرَاءِ غَيْمِكَ\nإِنَّ تَطْوِيرَكَ لِلرُّوحِ غَايَتُهَا\nيُمْسِي فِي الصَّبْرِ بَابًا لِلْإِنْتِصَارِ\nسرْ عَلَى نَهْجِ نَفْسٍ قَدْ رَضِيَتْ بِأَمْسٍ\nتَخْطُو نَحْوَ مُسْتَقْبَلٍ بِنُورِ النَّهَارِ\nكُلُّ أَمْرٍ لَهُ فِي النُّورِ بَصِيصُ أَمَلٍ\nيَرْسُمُ الرُّوحَ فِي الدُّنْيَا بِمُقْتَبَلٍ\nفِي الْقَنَاعَةِ بَحْرٌ مِنْ أَمَانِينَا\nيُبَشِّرُ الرُّوحَ بِالسَّلَامِ مِنَ الْمَرَامِ\nعُيُوبِي لَيْسَتْ عَارًا عَلَيَّ، بَلْ\nهِيَ سِمَاتٌ تُزِيدُ الْقَلْبَ فِي الصِّدَارِ\nأَقْبَلُهَا بِرِضًا فِي كُلِّ مَرْحَلَةٍ\nفَهِيَ الجُزْءُ مِنْ شَخْصِي وَمِنْ أَمَلِي\nلَسْتُ نُسْخَةً، وَلَا أَرْغَبُ فِي التَّكْرَارِ\nكُلُّ نَفْسٍ لَهَا فِي الْبُعْدِ مِقْدَار\nكُلُّ إِنْسَانٍ فَرِيدٌ فِي خَلِيقَتِهِ\nوَفِي مَا أَعْطَانِيَ الْغَفَّارُ أَفْتَخِرُ\nتَقَبَّلْ نَفْسَكَ، وَابْتَهِجْ بِلَحْظَةٍ هَانِئَةٍ\nفِي قَبُولِكَ تَجِدُ رَاحَةً مُطْمَئِنَّةً` },
+            { id: 'p7', title: 'عيدُ المودّة (الفطر)', type: 'فصحي', youtubeId: 'nIyBHZCG2sE', content: `عيدُ الفِطرِ أقبلَ بالبُشرات\nوضياؤهُ يملأُ الأرضَ بالخيراتِ\n\nيا نَسَائِمَ العِيدِ أقبل بِبَهْجَتِكَ\nوَانْثُرِ عِطْرَكَ فِي كُلِّ الجِهَاتِ\n\nجهَّزْنا لهُ بالكعكِ والبسكوتِ\nلننشرَ الفرحَ في كلِّ البيوتِ\n\nننتظِرُ صلاةَ العيدِ بشوقٍ وَلَهْفَةٍ\nلنحيا مع التكبيرِ بأزكى اللحظاتِ\n\nنَمْلأُ السَّاحَاتِ بِأَعْلَى التَّكْبِيرَاتِ\nفَتَهْتَزُّ أَرْوَاحُنَا بِنَشْوَةِ الطَّاعَاتِ\n\nيَا نُورَ العِيدِ زِدْنَا مِنْ بَهَائِكَ\nوَاجْعَلْ صَلَاتَنَا تَزْهُو بِبَرَكَاتِكَ\n\nالعِيدُ أَفْرَاحٌ تُزَيِّنُ دَارَنَا\nوَحُلِيّ المَوَدَّةِ تُنِيرُ التجمعات\n\nنَلْتَفُّ فِي العِيدِ أَهْلًا وَأَصْحَاب\nوَنَزْرَعُ البُشْرَى زُهُورًا فِي اللِّقَاءَاتِ\n\nيَهْنَأُ الصِّغَارُ بِالعِيدِيَّةِ مُبْتَهِجِينَ\nفَالعِيدُ بَسَمَاتٌ تَفِيضُ بِالبَهَجَاتِ\n\nكُلُّ الدُّرُوبِ تُنَادِي فِي بَهَاءِ\nفالعِيدُ أَقْبَلَ بِأسمى العَطَاءات\n\nأَكرَمَنَا اللَّهُ بِنُورِ فَضْلِهِ\nوَجَعَلَ العِيدَ بَرَكَاتٍ وَرَحَمَاتِ` },
             { id: 'p8', title: 'رسالة إلى عويس', type: 'عامية', youtubeId: 'i1ojmAQaWSM', content: `ياض يا عويس، اقلع الايربودز،\nركز كده معايا، وصفّيلي النفوس.\nكنت فين يا صاحبي السنين اللي عدت ديه؟\nصحابك اتخرجوا، وانت لسه قاعد في القهوة اللي هيه!\nهما خلصوا من بدري، واشتغلوا كمان،\nوانت بتصحى العصر، وتقول: "ده كان عندنا امتحان؟!"\nكنت دايمًا بتقول: "هبدا من بكره جد"،\nوبكره بيجي، والكسل عمال بيمد.\nالعلم نور، وانت مطفي النور،\nعامل فيها فاهم، وعايشلي الدور.\nيا عويس قوم، واعزم النية،\nالعمر بيجري، والسكة مش دايمًا هنية.\nالدنيا بتدي للي بيسعى،\nمش اللي نام وقال: "الفرصة مش ليا".\nيا واد قوم، خاف على مستقبلك،\nالنجاح مش هييجي لحد عندك ويسألك.\nياض يا عويس، تاني بقول،\nعويس عايزله شده، ويا رب الكسل يزول.\nيا بني، العتاب مش قسوه، ده خوف عليك،\nلو ما يهمنيش أمرك، مكنتش سألت عليك.` },
             { id: 'p9', title: "عيدُ المودّة (الأضحى)", type: 'فصحي', youtubeId: 'F62srEuBAq4', content: `يَا عِيدَ أَضْحَى الخَـيْرِ، فِيكَ سَنَاءُ،\nوَتُضِيءُ فِي الأَرْوَاحِ مَا أَظْلَاءُ\n\nيَـوْمُ الفِدَاءِ، فِي ضِيَائِكَ مَغْفِرَةٌ\nتَسْقِي القُلُوبَ، وَفِي الهُدَى أَصْدَاءُ\n\nفي ذَكْرَى إِبْرَاهِيمَ وَنَذْرُهُ\nلِلرَّبِّ، حِينَ عظُما الإِصْغَاءُ\n\nقَدْ هَيَّأَ القَلْبَ الكَبِيرَ لِمُهْجَةٍ\nهِيَ أَغْلَى مَا يُهْدَى، فَفَاضَ السَّنَاءُ\n\nوَتَجَلَّتِ الرَّحْمَاتُ، تُهْدِي كَبْشَهَا\nمِنْ سَمْتِ رَبٍّ، رِقَّةً وَسَخَاءُ\n\nفَتَسَامَتِ القِصَّةُ الخَالِدَةُ الَّتِي\nفِي نَفْسِ كُلِّ مُوَحِّدٍ إِحْيَاءُ\n\nعِيدٌ تُنَاجِي فِيهِ أَرْوَاحٌ السَّنَا\nوَتَلُوحُ فِي الأَفْقِ النَّقِيِّ ضِيَاءُ\n\nتَرْتَفِعُ التَّكْبِيرَاتُ، فِي أَصْدَائِهَا\nنَبْضٌ، وَفِي داخلها الإِقْبَاءُ\n\nوَالجَمْعُ تَسْكُنُهُ القُلُوبُ عَلَى الرِّضَا\nوَيَفِيضُ مِنْهَا الْوُدُّ وَالإِصْغَاءُ\n\nالأَضْحِيَاتُ تُقَدَّمُ الْأَرْوَاحُ قَبْلَهَا\nفَالْقَلْبُ يَسْبِقُهُنَّ وَالإِفْضَاءُ\nعِيدٌ تُقَابِلُ فِيهِ أَرْضٌ سَاعَةً\nفِي الحُبِّ، تَلْتَقِي السَّمَاءُ سَمَاءُ\n\nفَاحْفَظْ خُطَاهُ، كَمِثْلِ نَبِيِّنَا\nصَدَقَ العُهُودَ، وَكَمْ سَمَا الإِمْلاءُ` }
         ];
@@ -822,6 +983,119 @@
         
         loadTheme();
         renderPoems();
+
+        // --- Contact Form Validation ---
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const errorName = document.getElementById('error-name');
+        const errorEmail = document.getElementById('error-email');
+        const errorMessage = document.getElementById('error-message');
+        const helpName = document.getElementById('help-name');
+        const helpEmail = document.getElementById('help-email');
+        const helpMessage = document.getElementById('help-message');
+
+        function validateName(showError = true) {
+            const value = nameInput.value.trim();
+            if (!value) {
+                errorName.textContent = '';
+                errorName.classList.remove('active');
+                return false;
+            }
+            if (value.length < 2) {
+                if (showError) { errorName.textContent = 'الاسم يجب أن يتكون من حرفين على الأقل.'; errorName.classList.add('active'); }
+                return false;
+            }
+            if (value.length > 50) {
+                if (showError) { errorName.textContent = 'الاسم طويل جدًا. يرجى إدخال اسم أقصر.'; errorName.classList.add('active'); }
+                return false;
+            }
+            if (/[^\u0600-\u06FFa-zA-Z\s]/.test(value)) {
+                if (showError) { errorName.textContent = 'الاسم يجب ألا يحتوي على أرقام أو رموز. استخدم الحروف فقط.'; errorName.classList.add('active'); }
+                return false;
+            }
+            errorName.textContent = '';
+            errorName.classList.remove('active');
+            return true;
+        }
+        function validateEmail(showError = true) {
+            const value = emailInput.value.trim();
+            if (!value) {
+                errorEmail.textContent = '';
+                errorEmail.classList.remove('active');
+                return false;
+            }
+            if (!/^\S+@\S+\.\S+$/.test(value)) {
+                if (showError) { errorEmail.textContent = 'صيغة البريد الإلكتروني غير صحيحة. يرجى التأكد من كتابته بشكل صحيح.'; errorEmail.classList.add('active'); }
+                return false;
+            }
+            if (value.length > 100) {
+                if (showError) { errorEmail.textContent = 'البريد الإلكتروني طويل جدًا. يرجى إدخال بريد أقصر.'; errorEmail.classList.add('active'); }
+                return false;
+            }
+            errorEmail.textContent = '';
+            errorEmail.classList.remove('active');
+            return true;
+        }
+        function validateMessage(showError = true) {
+            const value = messageInput.value.trim();
+            if (!value) {
+                errorMessage.textContent = '';
+                errorMessage.classList.remove('active');
+                return false;
+            }
+            if (value.length < 10) {
+                if (showError) { errorMessage.textContent = 'الرسالة يجب أن تتكون من 10 أحرف على الأقل.'; errorMessage.classList.add('active'); }
+                return false;
+            }
+            if (value.length > 1000) {
+                if (showError) { errorMessage.textContent = 'الرسالة طويلة جدًا. يرجى تقليل عدد الأحرف.'; errorMessage.classList.add('active'); }
+                return false;
+            }
+            errorMessage.textContent = '';
+            errorMessage.classList.remove('active');
+            return true;
+        }
+
+        // Show help on focus
+        nameInput.addEventListener('focus', () => helpName.style.display = 'block');
+        nameInput.addEventListener('blur', () => { helpName.style.display = 'none'; validateName(true); updateSubmitState(); });
+        emailInput.addEventListener('focus', () => helpEmail.style.display = 'block');
+        emailInput.addEventListener('blur', () => { helpEmail.style.display = 'none'; validateEmail(true); updateSubmitState(); });
+        messageInput.addEventListener('focus', () => helpMessage.style.display = 'block');
+        messageInput.addEventListener('blur', () => { helpMessage.style.display = 'none'; validateMessage(true); updateSubmitState(); });
+
+        // Validate on input, but don't show error unless user has left the field
+        nameInput.addEventListener('input', () => { validateName(false); updateSubmitState(); });
+        emailInput.addEventListener('input', () => { validateEmail(false); updateSubmitState(); });
+        messageInput.addEventListener('input', () => { validateMessage(false); updateSubmitState(); });
+
+        function updateSubmitState() {
+            const validName = validateName(false);
+            const validEmail = validateEmail(false);
+            const validMessage = validateMessage(false);
+            const allFilled = nameInput.value.trim() && emailInput.value.trim() && messageInput.value.trim();
+            if (validName && validEmail && validMessage && allFilled) {
+                submitButton.disabled = false;
+                submitButton.classList.remove('opacity-60', 'cursor-not-allowed', 'disabled');
+            } else {
+                submitButton.disabled = true;
+                submitButton.classList.add('opacity-60', 'cursor-not-allowed', 'disabled');
+            }
+        }
+        // Initial state
+        updateSubmitState();
+
+        contactForm.addEventListener('submit', function(e) {
+            const validName = validateName(true);
+            const validEmail = validateEmail(true);
+            const validMessage = validateMessage(true);
+            if (!(validName && validEmail && validMessage)) {
+                e.preventDefault();
+                updateSubmitState();
+                return false;
+            }
+        });
     });
     </script>
 </body>
