@@ -10,7 +10,7 @@ An elegant and responsive website designed to showcase the poetic works of Islam
 ## نظرة عامة | Overview
 موقع شاعري أنيق ومتجاوب يعرض أعمال الشاعر إسلام أسامة سعد، مصمم بعناية فائقة ليعكس جمال الشعر العربي وروحانيته.
 
-## 🏛️ Project Structure
+## Project Structure
 The repository is structured to be clean and easily deployable on static hosting platforms like Vercel.
 
 ```
@@ -22,26 +22,26 @@ The repository is structured to be clean and easily deployable on static hosting
 └── README.md             # This readme file.
 ```
 
-## ✨ المميزات الرئيسية | Key Features
+## المميزات الرئيسية | Key Features
 
-### 🎨 التصميم والجماليات (Design & Aesthetics)
+### التصميم والجماليات (Design & Aesthetics)
 - **تصميم شاعري فريد**: ألوان دافئة ومتدرجات ذهبية تعكس روح الشعر العربي.
 - **خطوط عربية أنيقة**: استخدام خطوط `Amiri`, `Cairo`, و `Scheherazade` لجمالية فائقة.
 - **تأثيرات بصرية متقدمة**: `Aurora effects`, `Gradient animations`, و `Floating elements` لإضافة عمق بصري.
 - **وضع مظلم وفاتح**: إمكانية التبديل بين الأوضاع حسب تفضيل المستخدم.
 
-### 📱 الاستجابة والتوافق (Responsiveness & Compatibility)
+### الاستجابة والتوافق (Responsiveness & Compatibility)
 - **تصميم متجاوب بالكامل**: يعمل بسلاسة على جميع الأجهزة (هاتف، تابلت، سطح المكتب).
 - **توافق مع المتصفحات**: يدعم جميع المتصفحات الحديثة.
 - **أداء محسن**: تحميل سريع وتفاعل سلس بفضل التحسينات المطبقة.
 
-### 🎭 المحتوى والوظائف (Content & Functionality)
+### المحتوى والوظائف (Content & Functionality)
 - **مجموعة قصائد متنوعة**: عرض قصائد بالفصحى والعامية مع إمكانية عرض تفصيلي في نافذة منبثقة.
 - **مقاطع فيديو يوتيوب**: ربط مباشر بالقصائد المسموعة لتعزيز التجربة.
 - **نموذج تواصل**: نموذج احترافي للتواصل المباشر مع الشاعر.
 - **تأثيرات تفاعلية**: أنيميشن عند التمرير والتفاعل لتعزيز تجربة المستخدم.
 
-## 🛠️ الهيكل التقني | Tech Stack
+## الهيكل التقني | Tech Stack
 
 - **HTML5**: هيكل دلالي محسن للوصول ومحركات البحث.
 - **CSS3**: (via **Tailwind CSS CDN**) لتصميم متقدم وتأثيرات متجاوبة.
@@ -49,7 +49,7 @@ The repository is structured to be clean and easily deployable on static hosting
 - **Feather Icons**: أيقونات أنيقة وخفيفة الوزن.
 - **Web3Forms**: لإدارة رسائل نموذج التواصل.
 
-## 🚀 Deployment with Vercel
+## Deployment with Vercel
 Hosting this project on Vercel is straightforward as it requires no build configuration.
 
 1.  **Push to GitHub:** Ensure your `index.html` file and the `assets` folder are pushed to your GitHub repository.
@@ -63,7 +63,7 @@ Hosting this project on Vercel is straightforward as it requires no build config
     - Click the **"Deploy"** button.
 4.  **Done:** Your website will be live in minutes at your custom Vercel URL.
 
-## 🔧 كيفية الاستخدام المحلي | Local Usage
+## كيفية الاستخدام المحلي | Local Usage
 
 To run the website on your local machine:
 1.  Clone the repository: `git clone https://github.com/Eslam1Osama/poetry-portfolio-eslam.git`
