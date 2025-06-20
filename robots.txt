@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://poetbeloved-eslam-osama-saad.vercel.app/sitemap.xml
