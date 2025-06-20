@@ -25,6 +25,86 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
+
+<!-- Service Worker Registration for PWA -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('sw.js').catch(function(e){});
+    });
+  }
+</script>
+
+<!-- Enhanced Theme Switcher, Focus, and Accessibility JS -->
+<script>
+(function(){
+  // Theme switching with localStorage and prefers-color-scheme
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('theme-toggle');
+  var sunIcon = document.getElementById('theme-icon-sun');
+  var moonIcon = document.getElementById('theme-icon-moon');
+  function setTheme(dark) {
+    if (dark) {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      sunIcon.style.opacity = 0;
+      moonIcon.style.opacity = 1;
+    } else {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      sunIcon.style.opacity = 1;
+      moonIcon.style.opacity = 0;
+    }
+  }
+  function getPreferredTheme() {
+    var stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  if (themeToggle && sunIcon && moonIcon) {
+    setTheme(getPreferredTheme());
+    themeToggle.addEventListener('click', function(){
+      setTheme(!root.classList.contains('dark'));
+    });
+  }
+
+  // Skip to content focus
+  var skip = document.querySelector('.skip-link');
+  if (skip) {
+    skip.classList.remove('visually-hidden');
+    skip.addEventListener('click', function(e){
+      var main = document.getElementById('main-content');
+      if (main) { main.focus(); }
+    });
+  }
+
+  // Animate poetic verses
+  window.addEventListener('DOMContentLoaded', function(){
+    var verses = document.querySelectorAll('.poem-verse');
+    for (var i=0; i<verses.length; ++i) {
+      if (i%3===0) verses[i].classList.add('poetic-animated');
+    }
+  });
+
+  // Focus trap for modal
+  var modal = document.getElementById('poem-modal');
+  if (modal) {
+    modal.addEventListener('keydown', function(e){
+      if (e.key === 'Tab') {
+        var focusable = modal.querySelectorAll('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])');
+        focusable = Array.prototype.slice.call(focusable).filter(function(el){return !el.disabled && el.offsetParent!==null;});
+        var first = focusable[0], last = focusable[focusable.length-1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      if (e.key === 'Escape') {
+        var close = document.getElementById('close-modal');
+        if (close) close.click();
+      }
+    });
+  }
+})();
+</script>
     <style>
         /* --- Custom Styles --- */
 
@@ -551,11 +631,40 @@
           }
         }
     </style>
+  <!-- Skip to Content Link for Accessibility -->
+  <a href="#main-content" class="skip-link visually-hidden">تخطي إلى المحتوى الرئيسي</a>
+  
+  <!-- Manifest & Favicon for PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- Enhanced poetic, responsive, accessible, cross-browser CSS -->
+  <link rel="stylesheet" href="enhanced.css">
+  
+  <!-- Polyfills for IE11/old browsers -->
+  <script>
+    if (window && !window.CSS || !window.CSS.supports) {
+      var e = document.createElement('script');
+      e.src = 'https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2CObject.entries%2CObject.assign%2CElement.prototype.closest';
+      document.head.appendChild(e);
+    }
+  </script>
 </head>
 <body class="antialiased">
+    <!-- Poetic SVG Motif (top right) -->
+    <svg class="poetic-motif" style="top:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M90 10 Q120 60 170 90 Q120 120 90 170 Q60 120 10 90 Q60 60 90 10Z" stroke="var(--accent-color,#ff8c42)" stroke-width="3" fill="none" opacity="0.5"/>
+      <circle cx="90" cy="90" r="18" fill="var(--primary-color,#e59f71)" opacity="0.18"/>
+    </svg>
+    <!-- Poetic SVG Motif (bottom left) -->
+    <svg class="poetic-motif" style="bottom:0;left:0;width:120px;height:120px;" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="60" cy="60" rx="55" ry="30" stroke="var(--secondary-color,#d18c6a)" stroke-width="2" fill="none" opacity="0.3"/>
+      <ellipse cx="60" cy="60" rx="12" ry="6" fill="var(--accent-color,#ff8c42)" opacity="0.09"/>
+    </svg>
+
 
     <!-- Preloader -->
-    <div id="preloader">
+    <div id="preloader" aria-live="polite" aria-label="جاري التحميل">
         <div class="spinner"></div>
     </div>
 
@@ -565,7 +674,7 @@
             <div class="flex items-center justify-between h-28">
                 <a href="#" class="flex items-center gap-3">
                     <div class="logo-circle">
-                        <img src="assets/logo.png" alt="PoetBeLoved Logo" class="h-10">
+                        <img src="assets/logo.png" alt="PoetBeLoved Logo" class="h-10" loading="lazy" fetchpriority="high">
                     </div>
                     <span class="font-amiri text-2xl font-bold text-gradient">PoetBeLoved</span>
                 </a>
@@ -575,12 +684,12 @@
                         <a href="#about" class="nav-link py-2">عن الشاعر</a>
                         <a href="#contact" class="nav-link py-2">تواصل معي</a>
                     </div>
-                    <button id="theme-toggle" class="relative p-2 h-10 w-10 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color overflow-hidden">
+                    <button id="theme-toggle" class="relative p-2 h-10 w-10 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color overflow-hidden" aria-label="تبديل الوضع الليلي/النهاري" title="تبديل الوضع الليلي/النهاري">
                         <i data-feather="sun" id="theme-icon-sun" class="absolute transition-all duration-300 ease-in-out transform"></i>
                         <i data-feather="moon" id="theme-icon-moon" class="absolute transition-all duration-300 ease-in-out transform"></i>
                     </button>
                     <div class="md:hidden">
-                        <button id="mobile-menu-button">
+                        <button id="mobile-menu-button" aria-label="فتح القائمة الرئيسية" title="فتح القائمة الرئيسية">
                             <i data-feather="menu"></i>
                         </button>
                     </div>
@@ -594,7 +703,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1" aria-label="المحتوى الرئيسي">
         <!-- Hero Section -->
         <section id="hero" class="relative text-center py-16 sm:py-20 md:py-32 px-4 overflow-hidden">
             <div class="hero-aurora-bg">
@@ -640,7 +749,8 @@
         </section>
 
         <!-- Poem Collection Section -->
-        <section id="poems" class="py-20 px-4 sm:px-6 lg:px-8">
+        <section id="poems" class="py-20 px-4 sm:px-6 lg:px-8" aria-labelledby="poems-heading">
+    <h2 id="poems-heading" class="visually-hidden">مجموعة القصائد</h2>
             <div class="container mx-auto">
                 <div class="text-center mb-8 sm:mb-12 fade-in-section">
                     <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-gradient mb-3 sm:mb-4 animated-gradient"> القصائد</h2>
@@ -660,7 +770,8 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-card-custom relative overflow-hidden">
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-card-custom relative overflow-hidden" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="visually-hidden">عن الشاعر</h2>
             <div class="about-aurora-bg">
                 <span class="aurora1"></span>
                 <span class="aurora2"></span>
@@ -669,7 +780,7 @@
             <div class="container mx-auto text-center fade-in-section">
                 <h2 class="font-amiri text-4xl font-bold text-gradient mb-8 animated-gradient">عن الشاعر</h2>
                 <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-12">
-                    <img src="assets/my_photo.jpg" alt="صورة الشاعر إسلام أسامة سعد" class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[32rem] lg:h-[32rem] rounded-full object-cover shadow-2xl border-4 sm:border-6 md:border-8 border-primary-custom flex-shrink-0 hover:scale-105 transition-transform duration-300">
+                    <img src="assets/my_photo.jpg" alt="صورة الشاعر إسلام أسامة سعد" class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[32rem] lg:h-[32rem] rounded-full object-cover shadow-2xl border-4 sm:border-6 md:border-8 border-primary-custom flex-shrink-0 hover:scale-105 transition-transform duration-300" loading="lazy" alt="صورة الشاعر إسلام أسامة سعد" fetchpriority="low">
                     <div class="md:text-right">
                         <h3 class="text-2xl sm:text-3xl font-amiri font-bold mb-2 sm:mb-3">إسلام أسامة سعد</h3>
                         <p class="text-lg sm:text-xl leading-relaxed">
@@ -684,11 +795,12 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="visually-hidden">تواصل معي</h2>
             <div class="container mx-auto text-center fade-in-section">
                 <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-gradient mb-3 sm:mb-4 animated-gradient">تواصل معي</h2>
                 <p class="text-base sm:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">يسعدني سماع آرائكم وتعليقاتكم. شاركوني أفكاركم أو استفساراتكم عبر النموذج التالي.</p>
-                <form id="contact-form" class="max-w-xl mx-auto text-right px-4 sm:px-0" novalidate>
+                <form id="contact-form" class="max-w-xl mx-auto text-right px-4 sm:px-0" novalidate aria-labelledby="contact-heading" aria-describedby="form-message">
                     <input type="hidden" name="access_key" value="156f7ac9-5df6-4f52-8d54-40e0cbc9a672">
                     <input type="hidden" name="subject" value="رسالة جديدة من زائر لموقع PoetBeLoved">
                     <input type="hidden" name="from_name" value="PoetBeLoved Website">
@@ -714,29 +826,29 @@
                         إرسال
                     </button>
                 </form>
-                 <p id="form-message" class="mt-4 sm:mt-6 text-base sm:text-lg"></p>
+                 <p id="form-message" class="mt-4 sm:mt-6 text-base sm:text-lg" aria-live="polite"></p>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-card-custom py-8">
+    <footer class="bg-card-custom py-8" role="contentinfo" aria-label="معلومات الموقع">
         <div class="container mx-auto px-4 text-center text-text-color">
             <p class="text-base sm:text-lg">&copy; 2025 PoetBeLoved. تصميم وتطوير بحب.</p>
-            <button id="copyright-btn" class="mt-3 sm:mt-4 text-sm sm:text-base hover\:text-accent-custom transition-colors">إشعار حقوق النشر</button>
+            <button id="copyright-btn" class="mt-3 sm:mt-4 text-sm sm:text-base hover\:text-accent-custom transition-colors" aria-label="إشعار حقوق النشر" title="إشعار حقوق النشر">إشعار حقوق النشر</button>
         </div>
     </footer>
 
     <!-- Poem Modal -->
-    <div id="poem-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div id="poem-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-body">
         <div id="modal-content-wrapper" class="w-full max-w-3xl rounded-lg shadow-2xl transform transition-all duration-300 scale-95 opacity-0 bg-modal-custom border border-primary-custom/20">
              <div class="p-3 sm:p-6 md:p-8 relative">
-                <button id="close-modal" class="absolute top-3 sm:top-4 left-3 sm:left-4 text-inherit hover\:text-accent-custom transition-colors z-10">
+                <button id="close-modal" class="absolute top-3 sm:top-4 left-3 sm:left-4 text-inherit hover\:text-accent-custom transition-colors z-10" aria-label="إغلاق النافذة" title="إغلاق النافذة">
                     <i data-feather="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                 </button>
                 <div class="max-h-[80vh] sm:max-h-[85vh] overflow-y-auto px-2 pt-8 sm:pt-10 md:pt-12">
-                    <h2 id="modal-title" class="text-2xl sm:text-3xl lg:text-4xl text-center font-amiri font-bold mb-6 sm:mb-8 text-gradient"></h2>
-                    <div id="modal-body" class="font-amiri text-inherit whitespace-pre-wrap poem-text-display">
+                    <h2 id="modal-title" class="text-2xl sm:text-3xl lg:text-4xl text-center font-amiri font-bold mb-6 sm:mb-8 text-gradient" tabindex="0"></h2>
+                    <div id="modal-body" class="font-amiri text-inherit whitespace-pre-wrap poem-text-display" aria-live="polite">
                     </div>
                     <div id="modal-video-container" class="mt-12 hidden">
                          <hr class="border-t-2 border-dashed border-secondary-color/50 w-1/2 mx-auto my-8">
