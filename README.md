@@ -76,4 +76,5 @@ An elegant, responsive, and SEO-optimized website to showcase the poetic works o
 ---
 
 **تم التطوير بحب وعناية فائقة لخدمة الشعر العربي الأصيل ❤️**
+
 **developed by EOPeak | Eslam Osama Saad**
