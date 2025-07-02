@@ -2,7 +2,7 @@
 
 An elegant, responsive, and SEO-optimized website to showcase the poetic works of Islam Osama Saad. Designed for beauty, accessibility, and performance, this site is ready for modern static hosting (Vercel, GitHub Pages, Netlify, etc.).
 
-[**>> View Live Demo <<**](https://poetbeloved-eslam-osama-saad.vercel.app/)
+[**>> View Live Demo <<**](https://poetbeloved.vercel.app/)
 
 ---
 
@@ -76,3 +76,4 @@ An elegant, responsive, and SEO-optimized website to showcase the poetic works o
 ---
 
 **تم التطوير بحب وعناية فائقة لخدمة الشعر العربي الأصيل ❤️**
+**developed by EOPeak | Eslam Osama Saad**
