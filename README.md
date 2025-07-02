@@ -72,9 +72,8 @@ An elegant, responsive, and SEO-optimized website to showcase the poetic works o
 - **إسلام أسامة سعد**
 - **شاعر ومهندس تقني**
 - **Email:** eo54872@gmail.com
+- **developed by EOPeak | Eslam Osama Saad**
 
 ---
 
 **تم التطوير بحب وعناية فائقة لخدمة الشعر العربي الأصيل ❤️**
-
-**developed by EOPeak | Eslam Osama Saad**
